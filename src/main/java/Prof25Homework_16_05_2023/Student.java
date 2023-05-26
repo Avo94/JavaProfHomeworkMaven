@@ -6,8 +6,6 @@ import java.util.OptionalDouble;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static java.lang.Integer.parseInt;
-
 public class Student {
     private int id;
     private String name;
@@ -18,9 +16,6 @@ public class Student {
 
     public Student(String name, int age, Degree degree) {
         this.id = countId++;
-        this.name = name;
-        this.age = age;
-        this.degree = degree;
         allStudents.put(id, new Student(name, (Integer) age, degree));
     }
 

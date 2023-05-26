@@ -3,8 +3,9 @@ package Prof25Homework_16_05_2023;
 import java.util.Arrays;
 
 public class ExampleApp {
+
     public static void main(String[] args) {
-        
+
         //Part 1
         Calculator calculator = new Calculator();
         int max = calculator.max(new int[]{2, 4, 7, 1, 3});
