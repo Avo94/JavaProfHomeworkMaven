@@ -1,7 +1,5 @@
 package Prof27Homework_25_05_2023;
 
-import java.util.GregorianCalendar;
-
 import static Prof27Homework_25_05_2023.HorseRacing.*;
 
 public class Horse implements Runnable {
@@ -16,9 +14,19 @@ public class Horse implements Runnable {
     @Override
     public void run() {
         double alreadyRan = 0;
-        while (alreadyRan < hippodromeLength) {
+        while (alreadyRan <= HIPPODROME_LENGTH) {
             alreadyRan += this.step;
+            try {
+                Thread.sleep(1);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
-        resultMap.put(this.name, new GregorianCalendar().getTime().getTime());
+        resultMap.put(this, System.currentTimeMillis());
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }

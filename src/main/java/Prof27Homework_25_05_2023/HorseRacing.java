@@ -1,11 +1,13 @@
 package Prof27Homework_25_05_2023;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class HorseRacing {
-    public static int hippodromeLength = 1000;
-    public static Map<String, Long> resultMap = new ConcurrentHashMap<>();
+    public static final int HIPPODROME_LENGTH = 1000;
+    public static Map<Horse, Long> resultMap = new ConcurrentHashMap<>();
 
     public static Thread threadOne;
     public static Thread threadTwo;
@@ -17,6 +19,7 @@ public class HorseRacing {
     public static Thread threadEight;
     public static Thread threadNine;
     public static Thread threadTen;
+    public static List<Thread> horses;
 
     public static void main(String[] args) {
 
@@ -31,16 +34,11 @@ public class HorseRacing {
         threadNine = new Thread(new Horse("Великий"));
         threadTen = new Thread(new Horse("Зорька"));
 
-        threadOne.start();
-        threadTwo.start();
-        threadThree.start();
-        threadFour.start();
-        threadFive.start();
-        threadSix.start();
-        threadSeven.start();
-        threadEight.start();
-        threadNine.start();
-        threadTen.start();
+        horses = Arrays.asList(threadOne, threadTwo, threadThree, threadFour,
+                threadFive, threadSix, threadSeven, threadEight, threadNine, threadTen);
+        for (Thread horse : horses) {
+            horse.start();
+        }
 
         Thread printer = new Thread(new ResultPrinter());
         printer.start();

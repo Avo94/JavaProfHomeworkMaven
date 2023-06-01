@@ -11,20 +11,12 @@ public class ResultPrinter implements Runnable {
 
     @Override
     public void run() {
-        try {
-            threadOne.join();
-            threadTwo.join();
-            threadOne.join();
-            threadThree.join();
-            threadFour.join();
-            threadFive.join();
-            threadSix.join();
-            threadSeven.join();
-            threadEight.join();
-            threadNine.join();
-            threadTen.join();
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+        while (horses.size() != resultMap.size()) {
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss SS");
@@ -32,5 +24,6 @@ public class ResultPrinter implements Runnable {
                 .sorted(Comparator.comparingDouble(Map.Entry::getValue))
                 .forEach(x -> System.out.println(x.getKey() +
                         ", время финиша - " + simpleDateFormat.format(new Date(x.getValue()))));
+        resultMap.forEach((k, v) -> System.out.println(k + ", время финиша - " + simpleDateFormat.format(new Date(v))));
     }
 }
