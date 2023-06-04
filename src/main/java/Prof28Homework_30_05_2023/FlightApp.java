@@ -1,13 +1,18 @@
 package Prof28Homework_30_05_2023;
 
-import Prof26Homework_23_05_2023.Trip;
-
 import java.util.*;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class FlightApp {
+    static Object log = null;
+    static Integer counter = 1;
+
     public static void main(String[] args) {
+
+        Thread logger = new Thread(new Log());
+        logger.setDaemon(true);
+        logger.start();
 
         String exit;
         List<Trip> routes = List.of(
@@ -59,8 +64,12 @@ public class FlightApp {
             Scanner decimal = new Scanner(System.in);
             System.out.println("\nВведите минимальное значение диапазона цен, в котором хотите найти билеты:");
             double minPrice = decimal.nextDouble();
+            log = minPrice;
+            counter = 0;
             System.out.println("Введите максимальное значение диапазона цен, в котором хотите найти билеты:");
             double maxPrice = decimal.nextDouble();
+            log = maxPrice;
+            counter = 0;
             System.out.println("\n(D) Список поездок в указанном ценовом диапазоне:");
             routes.stream().filter(x -> x.getPrice() >= minPrice && x.getPrice() <= maxPrice).forEach(System.out::println);
 
@@ -68,14 +77,20 @@ public class FlightApp {
             System.out.println("\nВыберете город начала поездки из списка доступных:");
             System.out.println(routes.stream().map(Trip::getSource).collect(Collectors.toSet()));
             String source = new Scanner(System.in).nextLine();
+            log = source;
+            record();
             System.out.println("\n(E) Все доступыне поездки из выбранного города:");
             routes.stream().filter(x -> source.equals(x.getSource())).forEach(System.out::println);
 
             // F
             System.out.println("\nВведите минимальное значение диапазона цен из города " + source + ":");
             double sourceMinPrice = decimal.nextDouble();
+            log = sourceMinPrice;
+            record();
             System.out.println("Введите максимальное значение диапазона цен из города " + source + ":");
             double sourceMaxPrice = decimal.nextDouble();
+            log = sourceMaxPrice;
+            record();
             System.out.println("\n(F) Список поездок в указанном ценовом диапазоне из города " + source + ":");
             routes.stream().filter(x -> source.equals(x.getSource()))
                     .filter(x -> x.getPrice() >= sourceMinPrice && x.getPrice() <= sourceMaxPrice)
@@ -111,7 +126,11 @@ public class FlightApp {
 
             System.out.println("\nНажмите Enter, чтобы использвать программу повторно. Чтобы выйти введите Q.");
             exit = new Scanner(System.in).nextLine();
+            log = exit;
+            record();
         } while (!"Q".equals(exit));
+
+        logger.interrupt();
 
         // G
         System.out.println("\n(G) Общее количество доступных поездок - " + routes.size());
@@ -133,6 +152,8 @@ public class FlightApp {
         do {
             System.out.println("Введите дату в формате dd.MM.yy:");
             date = new Scanner(System.in).nextLine();
+            log = date;
+            record();
             Pattern pattern = Pattern.compile("((0?[1-9]|[1-2]\\d|3[0-1])\\.(0?[1-9]|1[0-2])\\.23)");
             correctDate = pattern.matcher(date).matches();
         }
@@ -146,6 +167,8 @@ public class FlightApp {
         System.out.println("Введите число дней от указанной даты в диапазоне которых хотите найти все рейсы.");
         System.out.println("Для поиска рейсов перед указанной датой, введите отрицательное число:");
         int interval = new Scanner(System.in).nextInt();
+        log = interval;
+        record();
         GregorianCalendar dateWithInterval = new GregorianCalendar();
         dateWithInterval.setTime(tripDate.getTime());
         dateWithInterval.add(Calendar.DATE, interval);
@@ -156,5 +179,9 @@ public class FlightApp {
             dateWithInterval = tempDate;
         }
         return new GregorianCalendar[]{tripDate, dateWithInterval};
+    }
+
+    private static void record() {
+        counter = 0;
     }
 }
