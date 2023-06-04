@@ -16,13 +16,10 @@ public class Student {
 
     public Student(String name, int age, Degree degree) {
         this.id = countId++;
-        allStudents.put(id, new Student(name, (Integer) age, degree));
-    }
-
-    private Student(String name, Integer age, Degree degree) {
         this.name = name;
         this.age = age;
         this.degree = degree;
+        allStudents.put(id, this);
     }
 
     public int getAge() {
@@ -31,6 +28,10 @@ public class Student {
 
     public Degree getDegree() {
         return degree;
+    }
+
+    public static Map<Integer, Student> getAllStudents() {
+        return allStudents;
     }
 
     public static Set<Map.Entry<Integer, Student>> getListOfStudents() {
@@ -45,13 +46,13 @@ public class Student {
 
     public static int getAverageAge() {
         OptionalDouble average = allStudents.values().stream().mapToInt(Student::getAge).average();
-        return (int) Math.round(average.orElseThrow(IllegalStateException::new));
+        return (int) Math.round(average.orElse(0));
     }
 
     public static int getAverageAge(Degree degree) {
         OptionalDouble average = allStudents.values().stream().filter(x -> x.getDegree().equals(degree))
                 .mapToInt(Student::getAge).average();
-        return (int) Math.round(average.orElseThrow(IllegalStateException::new));
+        return (int) Math.round(average.orElse(0));
     }
 
     @Override

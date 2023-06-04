@@ -11,19 +11,21 @@ public class ResultPrinter implements Runnable {
 
     @Override
     public void run() {
-        while (horses.size() != resultMap.size()) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss SS");
+        while (!Thread.currentThread().isInterrupted()) {
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+            }
+
+            if (horses.size() == resultMap.size()) {
+                resultMap.entrySet().stream()
+                        .sorted(Comparator.comparingDouble(Map.Entry::getValue))
+                        .forEach(x -> System.out.println(x.getKey() +
+                                ", время финиша - " + simpleDateFormat.format(new Date(x.getValue()))));
+                resultMap.forEach((k, v) -> System.out.println(k + ", время финиша - " + simpleDateFormat.format(new Date(v))));
+                Thread.currentThread().interrupt();
             }
         }
-
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss SS");
-        resultMap.entrySet().stream()
-                .sorted(Comparator.comparingDouble(Map.Entry::getValue))
-                .forEach(x -> System.out.println(x.getKey() +
-                        ", время финиша - " + simpleDateFormat.format(new Date(x.getValue()))));
-        resultMap.forEach((k, v) -> System.out.println(k + ", время финиша - " + simpleDateFormat.format(new Date(v))));
     }
 }

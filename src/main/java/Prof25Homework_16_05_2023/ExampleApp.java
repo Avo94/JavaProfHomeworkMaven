@@ -10,8 +10,8 @@ public class ExampleApp {
         Calculator calculator = new Calculator();
         int max = calculator.max(new int[]{2, 4, 7, 1, 3});
         int min = calculator.min(new int[]{2, 4, 7, 1, 3});
-        System.out.println(max);
-        System.out.println(min);
+        System.out.println("Max element = " + max);
+        System.out.println("Min element = " + min);
 
         int[] exampleArray = new int[]{0, 3, -2, 4, 3, 2};
         int[] result = ArraysUtil.removeDuplicates(exampleArray);

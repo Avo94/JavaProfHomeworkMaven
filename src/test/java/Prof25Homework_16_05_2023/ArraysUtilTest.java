@@ -3,6 +3,8 @@ package Prof25Homework_16_05_2023;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ArraysUtilTest {
@@ -17,12 +19,27 @@ class ArraysUtilTest {
     }
 
     @Test
-    void getMatchesWhenOneParameterIsNull() {
+    void getMatchesWhenFirstParameterIsNull() {
         Assertions.assertThrows(NullPointerException.class, () -> ArraysUtil.getMatches(new int[]{0}, null));
     }
 
     @Test
-    void getMatchesWhenParametersIsNullWithException() {
-        Assertions.assertNotNull(ArraysUtil.getMatches(null, null));
+    void getMatchesWhenSecondParameterIsNull() {
+        Assertions.assertThrows(NullPointerException.class, () -> ArraysUtil.getMatches(null, new int[]{0}));
+    }
+
+    @Test
+    void getMatchesWhenBothParameterIsNull() {
+        Assertions.assertThrows(NullPointerException.class, () -> ArraysUtil.getMatches(null, null));
+    }
+
+    @Test
+    void getMatchesWithNullParametersWithException() {
+        // Assertions.assertNotNull(ArraysUtil.getMatches(null, null));
+    }
+
+    @Test
+    void getMatchesWithNullParametersWithoutException() {
+        // Assertions.assertNull(ArraysUtil.getMatches(null, null));
     }
 }
