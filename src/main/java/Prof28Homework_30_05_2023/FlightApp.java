@@ -1,14 +1,22 @@
 package Prof28Homework_30_05_2023;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
 import java.util.*;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class FlightApp {
+
     static Object log = null;
     static Integer counter = 1;
+    static String path = "C:\\Users\\Anton\\Downloads\\log\\log.txt";
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
+
+        PrintStream console = System.out;
+        PrintStream logPath = new PrintStream(new FileOutputStream(path, true));
 
         Thread logger = new Thread(new Log());
         logger.setDaemon(true);
@@ -71,7 +79,14 @@ public class FlightApp {
             log = maxPrice;
             counter = 0;
             System.out.println("\n(D) Список поездок в указанном ценовом диапазоне:");
-            routes.stream().filter(x -> x.getPrice() >= minPrice && x.getPrice() <= maxPrice).forEach(System.out::println);
+            routes.stream().filter(x -> x.getPrice() >= minPrice && x.getPrice() <= maxPrice)
+                    .forEach(System.out::println);
+            System.setOut(logPath);
+            System.out.println();
+            routes.stream().filter(x -> x.getPrice() >= minPrice && x.getPrice() <= maxPrice)
+                    .forEach(System.out::println);
+            System.out.println();
+            System.setOut(console);
 
             // E
             System.out.println("\nВыберете город начала поездки из списка доступных:");
@@ -81,6 +96,11 @@ public class FlightApp {
             record();
             System.out.println("\n(E) Все доступыне поездки из выбранного города:");
             routes.stream().filter(x -> source.equals(x.getSource())).forEach(System.out::println);
+            System.setOut(logPath);
+            System.out.println();
+            routes.stream().filter(x -> source.equals(x.getSource())).forEach(System.out::println);
+            System.out.println();
+            System.setOut(console);
 
             // F
             System.out.println("\nВведите минимальное значение диапазона цен из города " + source + ":");
@@ -95,6 +115,13 @@ public class FlightApp {
             routes.stream().filter(x -> source.equals(x.getSource()))
                     .filter(x -> x.getPrice() >= sourceMinPrice && x.getPrice() <= sourceMaxPrice)
                     .forEach(System.out::println);
+            System.setOut(logPath);
+            System.out.println();
+            routes.stream().filter(x -> source.equals(x.getSource()))
+                    .filter(x -> x.getPrice() >= sourceMinPrice && x.getPrice() <= sourceMaxPrice)
+                    .forEach(System.out::println);
+            System.out.println();
+            System.setOut(console);
 
             // New option 1
             System.out.println("\nВы можете увидеть все поездки в указанном диапазоне дат. " +
@@ -105,6 +132,12 @@ public class FlightApp {
             System.out.println("\n(New option (1)) Список поездок в указанном временном диапазоне:");
             routes.stream().filter(x -> x.getStartDate().compareTo(startDate) >= 0 &&
                     x.getReturnDate().compareTo(endDate) <= 0).forEach(System.out::println);
+            System.setOut(logPath);
+            System.out.println();
+            routes.stream().filter(x -> x.getStartDate().compareTo(startDate) >= 0 &&
+                    x.getReturnDate().compareTo(endDate) <= 0).forEach(System.out::println);
+            System.out.println();
+            System.setOut(console);
 
             // New option 2
             System.out.println("\nТакже вы можете найти все вылеты в указанном диапазоне. " +
@@ -114,6 +147,12 @@ public class FlightApp {
             System.out.println("\n(New option (2)) Список всех вылетов в указанном временном диапазоне:");
             routes.stream().filter(x -> x.getStartDate().compareTo(departureDatesInterval[0]) >= 0 &&
                     x.getStartDate().compareTo(departureDatesInterval[1]) <= 0).forEach(System.out::println);
+            System.setOut(logPath);
+            System.out.println();
+            routes.stream().filter(x -> x.getStartDate().compareTo(departureDatesInterval[0]) >= 0 &&
+                    x.getStartDate().compareTo(departureDatesInterval[1]) <= 0).forEach(System.out::println);
+            System.out.println();
+            System.setOut(console);
 
             // New option 3
             System.out.println("\nТакже вы можете найти все прилёты в указанном диапазоне. " +
@@ -123,6 +162,12 @@ public class FlightApp {
             System.out.println("\n(New option (3)) Список всех прилётов в указанном временном диапазоне:");
             routes.stream().filter(x -> x.getReturnDate().compareTo(arrivalDatesInterval[0]) >= 0 &&
                     x.getReturnDate().compareTo(arrivalDatesInterval[1]) <= 0).forEach(System.out::println);
+            System.setOut(logPath);
+            System.out.println();
+            routes.stream().filter(x -> x.getReturnDate().compareTo(arrivalDatesInterval[0]) >= 0 &&
+                    x.getReturnDate().compareTo(arrivalDatesInterval[1]) <= 0).forEach(System.out::println);
+            System.out.println();
+            System.setOut(console);
 
             System.out.println("\nНажмите Enter, чтобы использвать программу повторно. Чтобы выйти введите Q.");
             exit = new Scanner(System.in).nextLine();

@@ -12,7 +12,7 @@ public class Log implements Runnable {
     public void run() {
         FileWriter txtFile = null;
         try {
-            txtFile = new FileWriter("C:\\Users\\Anton\\Downloads\\log\\log.txt", true);
+            txtFile = new FileWriter(path, true);
         } catch (IOException e) {
             e.printStackTrace();
         }
