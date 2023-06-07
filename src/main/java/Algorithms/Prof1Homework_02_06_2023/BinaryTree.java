@@ -1,4 +1,4 @@
-package Algorithms.Prof1Homework__02_06_2023;
+package Algorithms.Prof1Homework_02_06_2023;
 
 public class BinaryTree {
 
