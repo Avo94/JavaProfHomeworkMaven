@@ -16,7 +16,7 @@ public class Producer implements Runnable {
         for (int idx = 0; idx < 50; idx++) {
             Message msg = new Message(String.valueOf(idx));
             try {
-                Thread.sleep(idx * 10);
+                Thread.sleep(idx * 100);
                 queue.put(msg);
                 System.out.println("Produced " + msg.getMsg());
             } catch (InterruptedException e) {

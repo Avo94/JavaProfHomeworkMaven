@@ -12,15 +12,12 @@ public class Consumer implements Runnable {
 
     @Override
     public void run() {
-        Message exit = new Message(null);
-        do {
+        while (true) {
             try {
-                // taking message from queue
-                exit = queue.take();
+                if ("exit".equals(queue.take().getMsg())) break;
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            // finding exit message
-        } while (!"exit".equals(exit.getMsg()));
+        }
     }
 }
