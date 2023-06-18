@@ -44,7 +44,7 @@ public class Trip {
 
     @Override
     public String toString() {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yy");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMMMM yy");
         String formatStartDate = simpleDateFormat.format(startDate.getTime());
         String formatReturnDate = simpleDateFormat.format(returnDate.getTime());
         return source + " - " + destination + ", " + hours + " hours. "

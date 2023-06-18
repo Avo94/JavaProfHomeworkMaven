@@ -133,8 +133,7 @@ public class FlightApp {
             date = new Scanner(System.in).nextLine();
             Pattern pattern = Pattern.compile("((0?[1-9]|[1-2]\\d|3[0-1])\\.(0?[1-9]|1[0-2])\\.23)");
             correctDate = pattern.matcher(date).matches();
-        }
-        while (!correctDate);
+        } while (!correctDate);
         String[] split = date.split("\\.");
         return new GregorianCalendar(Integer.parseInt(split[2]) + 2000,
                 Integer.parseInt(split[1]) - 1, Integer.parseInt(split[0]));
@@ -142,17 +141,11 @@ public class FlightApp {
 
     public static GregorianCalendar[] getDatesInterval(GregorianCalendar tripDate) {
         System.out.println("Введите число дней от указанной даты в диапазоне которых хотите найти все рейсы.");
-        System.out.println("Для поиска рейсов перед указанной датой, введите отрицательное число:");
         int interval = new Scanner(System.in).nextInt();
-        GregorianCalendar dateWithInterval = new GregorianCalendar();
-        dateWithInterval.setTime(tripDate.getTime());
-        dateWithInterval.add(Calendar.DATE, interval);
-        GregorianCalendar tempDate;
-        if (interval < 0) {
-            tempDate = tripDate;
-            tripDate = dateWithInterval;
-            dateWithInterval = tempDate;
-        }
-        return new GregorianCalendar[]{tripDate, dateWithInterval};
+        GregorianCalendar afterTripDate = tripDate;
+        GregorianCalendar beforeTripDate = tripDate;
+        afterTripDate.add(Calendar.DATE, interval);
+        beforeTripDate.add(Calendar.DATE, (-1) * interval);
+        return new GregorianCalendar[]{beforeTripDate, afterTripDate};
     }
 }
