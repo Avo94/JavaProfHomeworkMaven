@@ -9,8 +9,11 @@ public class ArraysUtil {
     public static int[] getMatches(int[] array1, int[] array2) {
         List<Integer> result = new ArrayList<>();
         for (int i = 0; i < array1.length; i++) {
-            if (array1[i] == array2[i]) {
-                result.add(array1[i]);
+            for (int j = i; j < array2.length; j++) {
+                if (array1[i] == array2[j]) {
+                    result.add(array1[i]);
+                    break;
+                }
             }
         }
         return result.stream().mapToInt(x -> x).toArray();
