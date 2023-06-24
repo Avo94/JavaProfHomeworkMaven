@@ -9,9 +9,9 @@ import java.util.stream.Collectors;
 
 public class FlightApp {
 
-    static Object log = null;
-    static Integer counter = 1;
-    static String path = "C:\\Users\\Anton\\Downloads\\log\\log.txt";
+    public static Object log = null;
+    public static Integer counter = 1;
+    public static String path = "C:\\Users\\Anton\\Downloads\\log\\log.txt";
 
     public static void main(String[] args) throws FileNotFoundException {
 
@@ -174,8 +174,6 @@ public class FlightApp {
             log = exit;
             record();
         } while (!"Q".equals(exit));
-
-        logger.interrupt();
 
         // G
         System.out.println("\n(G) Общее количество доступных поездок - " + routes.size());

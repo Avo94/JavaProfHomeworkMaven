@@ -17,22 +17,16 @@ public class Log implements Runnable {
             e.printStackTrace();
         }
 
-        while (!Thread.currentThread().isInterrupted()) {
+        while (true) {
             if (counter == 0) {
                 try {
                     txtFile.write(new GregorianCalendar().getTime() + " \"" + log + "\"\n");
-                    txtFile.flush();
+                    txtFile.close();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
                 counter++;
             }
-        }
-
-        try {
-            txtFile.close();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 }
