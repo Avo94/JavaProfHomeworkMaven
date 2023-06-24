@@ -9,9 +9,9 @@ public class FirewallEventListener implements Runnable {
 
     private final Object monitor;
 
-    private static int logCounter = 0;
+    public static int logCounter = 0;
 
-    static List<String> log = new ArrayList<>();
+    public static List<String> log = new ArrayList<>();
 
     public FirewallEventListener(Object monitor) {
         this.monitor = monitor;

@@ -34,10 +34,10 @@ public class Car implements Runnable {
 
             Thread.sleep(4350); // tanking
             synchronized (freeGasStations) {
-                semaphore.release();
                 freeGasStations[tempGasStation] = false;
                 System.out.println("Автомобиль " + carName + " заправился и освободил " + (tempGasStation + 1) + " колонку.");
             }
+            semaphore.release();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

@@ -1,5 +1,6 @@
 package Prof32Homework_13_06_2023.Hippodrome;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Callable;
 
@@ -15,6 +16,7 @@ public class ResultPrinter implements Callable<Map<Horse, Long>> {
 
     @Override
     public Map<Horse, Long> call() {
+        Map<Horse, Long> result = new HashMap<>();
         while (resultMap.size() < horses.length) {
             try {
                 Thread.sleep(100);
@@ -22,6 +24,8 @@ public class ResultPrinter implements Callable<Map<Horse, Long>> {
                 e.printStackTrace();
             }
         }
-        return resultMap;
+        resultMap.entrySet().stream().sorted(Map.Entry.comparingByKey())
+                .forEach(x -> result.put(x.getKey(), x.getValue()));
+        return result;
     }
 }

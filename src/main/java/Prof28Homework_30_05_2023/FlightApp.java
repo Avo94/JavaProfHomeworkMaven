@@ -175,6 +175,8 @@ public class FlightApp {
             record();
         } while (!"Q".equals(exit));
 
+        logger.interrupt();
+
         // G
         System.out.println("\n(G) Общее количество доступных поездок - " + routes.size());
         List<Double> minTripPrice = routes.stream().sorted(Comparator.comparingDouble(Trip::getPrice))

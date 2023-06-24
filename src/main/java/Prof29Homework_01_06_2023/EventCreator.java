@@ -5,11 +5,11 @@ import java.util.List;
 
 public class EventCreator {
 
-    static Integer programLifetime = 20;
-    static Integer startEventsListSize = 10;
-    static Event[] eventsList = new Event[startEventsListSize];
-    static Object monitor = new Object();
-    static List<Thread> eventListeners = Arrays.asList(
+    public static Integer programLifetime = 20;
+    public static Integer startEventsListSize = 10;
+    public static Event[] eventsList = new Event[startEventsListSize];
+    public static Object monitor = new Object();
+    public static List<Thread> eventListeners = Arrays.asList(
             new Thread(new FirewallEventListener(monitor)),
             new Thread(new FirewallEventListener(monitor)),
             new Thread(new FirewallEventListener(monitor)),

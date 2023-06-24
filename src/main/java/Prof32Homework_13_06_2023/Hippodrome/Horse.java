@@ -2,7 +2,7 @@ package Prof32Homework_13_06_2023.Hippodrome;
 
 import java.util.Map;
 
-public class Horse implements Runnable {
+public class Horse implements Runnable, Comparable<Horse> {
     private final String name;
     private final double step;
     private final Map<Horse, Long> resultsRecords;
@@ -32,5 +32,10 @@ public class Horse implements Runnable {
     @Override
     public String toString() {
         return name;
+    }
+
+    @Override
+    public int compareTo(Horse o) {
+        return 0;
     }
 }
