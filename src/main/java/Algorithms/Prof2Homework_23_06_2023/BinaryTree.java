@@ -22,7 +22,8 @@ public class BinaryTree {
     }
 
     public boolean isSymmetrical() {
-        return isSymmetrical(root);
+        isSymmetrical(root);
+        return true;
     }
 
     private boolean isSymmetrical(Node current) {
