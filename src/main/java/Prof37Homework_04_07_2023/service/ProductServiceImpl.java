@@ -47,9 +47,9 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.save(product);
     }
 
-    public Product addToCart(int id) {
+    public Product addToCart(Product product) {
         for (Product item : productRepository.getAll()) {
-            if (item.getId() == id) {
+            if (item.equals(product)) {
                 System.out.println("Product successfully added");
                 return productRepository.addToCart(item);
             }

@@ -6,9 +6,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class PaymentService {
 
-    Cash paymentByCash;
-    Card paymentByCard;
-    Check paymentByCheck;
+    private final Cash paymentByCash;
+    private final Card paymentByCard;
+    private final Check paymentByCheck;
 
     @Autowired
     public PaymentService() {

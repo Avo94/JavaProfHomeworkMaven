@@ -30,7 +30,7 @@ public class ProductController {
     }
 
     @PostMapping("/{id}")
-    public Product addToCart(@PathVariable(name = "id") int id) {
-        return productService.addToCart(id);
+    public Product addToCart(@RequestBody Product product) {
+        return productService.addToCart(product);
     }
 }
