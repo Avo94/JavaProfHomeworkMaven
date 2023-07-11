@@ -3,19 +3,17 @@ package Algorithms.Prof2Homework_23_06_2023;
 public class BinaryTreeApp {
 
     public static void main(String[] args) {
-        BinaryTree tree = new BinaryTree();
+        // Не симметричное
+        BinaryTree firstTree = new BinaryTree();
+        int[] intsOne = {6, 4, 8, 2, 3, 5, 7, 9, 1};
+        for (int ints : intsOne) firstTree.add(ints);
 
-        tree.add(6);
-        tree.add(4);
-        tree.add(8);
-        tree.add(2);
-        tree.add(3);
-        tree.add(5);
-        tree.add(7);
-        tree.add(9);
-        tree.add(1);
+        // Симметричное
+        BinaryTree secondTree = new BinaryTree();
+        int[] intsTwo = {5, 7, 3, 8, 9, 4, 6, 2, 1};
+        for (int ints : intsTwo) secondTree.add(ints);
 
-        System.out.println(tree);
-        System.out.println(tree.isSymmetrical());
+        System.out.println("Is first tree symmetrical: " + firstTree.isSymmetrical());
+        System.out.println("Is second tree symmetrical: " + secondTree.isSymmetrical());
     }
 }
